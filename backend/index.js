@@ -1,7 +1,8 @@
 import express, { response } from 'express'
 import mongoose from 'mongoose'
 import { PORT, mongoDBURL } from './config.js'
-import { Appointment, TimeSlot } from './models/appointmentModels.js'
+import { Appointment } from './models/appointmentModels.js'
+import { TimeSlot } from './models/timeSlotModel.js'
 
 const app = express()
 
@@ -79,25 +80,6 @@ app.get('/appointments', async (req, res) => {
     response.status(500).send({ message: error.message })
   }
 })
-
-//Route method for deleting a appointments using DELETE method
-app.delete('/appointments/:id', async (request, response) => {
-  try {
-    const { id } = request.params
-
-    const result = await Appointment.findByIdAndDelete(id)
-
-    if (!result) {
-      return response.status(404).json({ message: 'Appointment not found' })
-    }
-
-    return response.status(200).send({ message: 'Appointment deleted successfully' })
-  } catch (error) {
-    console.log(error.message)
-    response.status(500).send({ message: error.message })
-  }
-})
-
 
 //connecting to database via moongoose
 mongoose
