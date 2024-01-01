@@ -66,6 +66,8 @@ app.get('/slots', async (req, res) => {
   }
 })
 
+//added all commits
+
 //4. Route method for fetching all appointments using GET method
 app.get('/appointments', async (req, res) => {
   try {
